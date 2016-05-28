@@ -1,0 +1,138 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "components_wordpres0001_name": {
+            "defaultValue": "wordpres0001",
+            "type": "String"
+        },
+        "storageAccounts_wp3a5302c8887f_name": {
+            "defaultValue": "wp3a5302c8887f",
+            "type": "String"
+        },
+        "serverfarms_SPWordPress0001_name": {
+            "defaultValue": "SPWordPress0001",
+            "type": "String"
+        },
+        "sites_wordpres0001_name": {
+            "defaultValue": "wordpres0001",
+            "type": "String"
+        },
+        "databases_MySQLWordPress0001_name": {
+            "defaultValue": "MySQLWordPress0001",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourceGroups/WordPress/providers/microsoft.insights/components/wordpres0001'.",
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[parameters('components_wordpres0001_name')]",
+            "apiVersion": "2014-04-01",
+            "location": "Central US",
+            "tags": {
+                "hidden-link:/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourceGroups/WordPress/providers/Microsoft.Web/sites/wordpres0001": "Resource"
+            },
+            "properties": {
+                "ApplicationId": "[parameters('components_wordpres0001_name')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourceGroups/wordpress/providers/Microsoft.Storage/storageAccounts/wp3a5302c8887f'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageAccounts_wp3a5302c8887f_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "westeurope",
+            "tags": {},
+            "properties": {
+                "accountType": "Standard_LRS"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourceGroups/WordPress/providers/Microsoft.Web/serverfarms/SPWordPress0001'.",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "S1",
+                "tier": "Standard",
+                "size": "S1",
+                "family": "S",
+                "capacity": 1
+            },
+            "name": "[parameters('serverfarms_SPWordPress0001_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "West Europe",
+            "properties": {
+                "name": "[parameters('serverfarms_SPWordPress0001_name')]",
+                "numberOfWorkers": 1
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourceGroups/WordPress/providers/Microsoft.Web/sites/wordpres0001'.",
+            "type": "Microsoft.Web/sites",
+            "name": "[parameters('sites_wordpres0001_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "West Europe",
+            "tags": {
+                "hidden-link:/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourcegroups/WordPress/providers/SuccessBricks.ClearDB/databases/MySQLWordPress0001": "empty",
+                "hidden-related:/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourcegroups/WordPress/providers/Microsoft.Web/serverfarms/SPWordPress0001": "empty"
+            },
+            "properties": {
+                "name": "[parameters('sites_wordpres0001_name')]",
+                "hostNames": [
+                    "wordpres0001.azurewebsites.net"
+                ],
+                "enabledHostNames": [
+                    "wordpres0001.azurewebsites.net",
+                    "wordpres0001.scm.azurewebsites.net"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_wordpres0001_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_wordpres0001_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_SPWordPress0001_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_SPWordPress0001_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/95dd25a9-ab60-4d81-b433-80cd3e9e754b/resourceGroups/wordpress/providers/SuccessBricks.ClearDB/databases/MySQLWordPress0001'.",
+            "type": "SuccessBricks.ClearDB/databases",
+            "name": "[parameters('databases_MySQLWordPress0001_name')]",
+            "apiVersion": "2014-04-01",
+            "location": "West Europe",
+            "plan": {
+                "name": "Saturn"
+            },
+            "tags": {},
+            "properties": {
+                "hostname": "eu-cdbr-azure-west-d.cloudapp.net",
+                "name": "[parameters('databases_MySQLWordPress0001_name')]",
+                "id": "13A00C7406EED6819D4F9F2E9F7D1873",
+                "size_mb": 0,
+                "max_size_mb": "5120",
+                "status": {
+                    "name": "Healthy",
+                    "message": "Database is healthy and ready for use.",
+                    "level": "Info"
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

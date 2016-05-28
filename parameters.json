@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "components_wordpres0001_name": {
+            "value": null
+        },
+        "storageAccounts_wp3a5302c8887f_name": {
+            "value": null
+        },
+        "serverfarms_SPWordPress0001_name": {
+            "value": null
+        },
+        "sites_wordpres0001_name": {
+            "value": null
+        },
+        "databases_MySQLWordPress0001_name": {
+            "value": null
+        }
+    }
+}
